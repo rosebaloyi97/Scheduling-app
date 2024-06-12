@@ -1,0 +1,46 @@
+<div class="w-full h-[100vh] bg-center bg-cover flex justify-center items-center bg-[url('assets/Images/bg1.webp')]" >
+    <div class="rounded-lg h-[60vh] bg-opacity-40 bg-white w-3/4 border flex">
+       <div class="w-1/2 flex items-center" >
+            <div>
+                <p class="text-center text-4xl text-fuchsia-500 font-extrabold capitalize">Schedule Managment</p>
+                <img class="w-10/12 mx-auto" src="assets/Images/sh.png" alt="" srcset="">
+            </div>
+            
+       </div>
+       <div class="w-1/2" >
+        <form [formGroup]="loginForm"class="w-full flex flex-col h-full justify-center text-gray-600 items-center ">
+            <p class="text-3xl text-fuchsia-500 text-center font-extrabold">SIGN IN</p>
+            <div class="w-10/12  mx-auto my-2">
+                <label class="font-bold" for="">User Name</label>
+                <input formControlName="email" placeholder="Enter username" class="w-full rounded bg-gray-100  p-3" type="text">
+                <div class=" italic" *ngIf="loginForm.get('email')?.errors && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
+                    <div *ngIf="loginForm.get('email')?.hasError('required')">
+                        <span class="text-red-500">Username is required</span>
+                    </div>
+                </div>
+            </div>
+            <div class="w-10/12  mx-auto my-2">
+                <label class="font-bold" for="">Password</label>
+                <input formControlName="password" placeholder="Enter password" class="w-full rounded bg-gray-100  p-3" type="password">
+                <div class=" italic" *ngIf="loginForm.get('password')?.errors && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+                    <div *ngIf="loginForm.get('password')?.hasError('required')">
+                        <span class="text-red-500">Passowrd  is required</span>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <button (click)="onSubmit()" class="bg-fuchsia-500 shadow-lg w-1/2 text-white py-3 rounded-lg mx-auto t font-semibold" >Login</button>
+            <div *ngIf="error" class="bg-red-100 w-[80%] mx-auto border border-red-400 text-red-700 px-4 py-3 mt-2 rounded relative" role="alert">
+                <strong class="font-bold">Error!</strong> &nbsp;
+                <span class="block sm:inline">{{error}}</span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                  <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                </span>
+              </div>
+        
+        </form>
+       </div>
+    </div>
+
+</div>

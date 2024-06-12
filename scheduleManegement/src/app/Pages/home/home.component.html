@@ -1,0 +1,91 @@
+<div class=" w-full p-4">
+    <div class="w-full rounded-lg p-2 bg-white  shadow-lg bg-opacity-80 border">
+        <p class="text-fuchsia-400  font-bold text-4xl italic text-center">Welcome</p>
+    </div>
+   <br>
+   <div class="flex space-x-2 ">
+    <div class="w-2/3 rounded-lg h-[60vh] shadow-xl border  bg-blue-500 bg-opacity-20">
+        <div *ngIf="stuff.role=='Admin'" class="grid grid-cols-4 gap-2 italic">
+            <div [routerLink]="'/Dashboard/course'" class="rounded-lg  p-2  shadow-2xl  bg-white  ">
+                <img src="assets/Images/course1.png" alt="" srcset="">
+                <p class="text-center text-xl font-bold my-1 text-purple-600">Courses</p>
+            </div>
+            <div [routerLink]="'/Dashboard/stuff'" class="rounded-lg  p-2  shadow-2xl  bg-white  ">
+                <img src="assets/Images/lecture1.png" alt="" srcset="">
+                <p class="text-center text-xl font-bold my-1 text-yellow-600">Staff</p>
+            </div>
+            <div [routerLink]="'/Dashboard/student'" class="rounded-lg  p-2  shadow-2xl  bg-white  ">
+                <img src="assets/Images/student.png" alt="" srcset="">
+                <p class="text-center text-xl font-bold my-1 text-purple-600">Student</p>
+            </div>
+            <div [routerLink]="'/Dashboard/timetable'" class="rounded-lg  p-2  shadow-2xl  bg-white  ">
+                <img src="assets/Images/timetable.png" alt="" srcset="">
+                <p class="text-center text-xl font-bold my-1 text-blue-400">TimeTable</p>
+            </div>
+        </div>
+        <div class="bg-white rounded-md p-2 h-full overflow-auto hide-scrollbar " *ngIf="stuff.role=='Lecturer'">
+            <p class="text-2xl font-semibold text-gray-400" >Your Time Table This week</p>
+
+            <table class="timetable w-full border rounded-lg shadow-md mt-4">
+                <thead class="border-b">
+                  <tr>
+                    <th>Time</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b" *ngFor="let timeSlot of timeSlots">
+                        <td class="border-r">{{ timeSlot.timeRange }}</td>
+                        <td class="border-r" *ngFor="let day of [0, 1, 2, 3, 4, 5]">
+                          <div *ngFor="let subject of timeTable">
+                            <span *ngIf="subject.period === timeSlot.id && subject.weekDays === day">{{ subject.subject }} <br> {{stuff.surname}}</span>
+                          </div>
+                        </td>
+                        
+                      </tr>
+                </tbody>
+              </table>
+                <br>
+                <br>
+              <p class="text-lg font-normal text-gray-400">Subject Assigned</p>
+              <div class="w-full border-b flex justify-between text-gray-600 my-4 p-1" *ngFor="let item of subjectList">
+                 <span>{{item.subjectCode +" "+item.subjectName}}</span> <button routerLink="studentRegister/{{item.id}}" class="rounded text-white p-2 bg-sky-400">View Students</button>
+              </div>
+              
+        </div>
+    </div>
+    <div class="w-1/3 h-[60vh] border rounded-2xl bg-blue-400 bg-opacity-20">
+        <div class="w-full bg-white p-2 h-full bg-opacity-50 rounded-2xl shadow-lg">
+            <div class="w-full flex flex-wrap p-4" >
+              <div class="w-[60%]">
+                <img class="" src="assets/Images/floatleftlogo.png" alt="" srcset="">
+                <p class="text-center text-2xl font-bold text-red-600">{{stuff.role}}</p>
+
+              </div>
+              <div class="w-[40%]">
+                <img class="rounded-full border" src="assets/Images/lecture1.png" alt="" srcset="">
+              </div>
+            </div>
+           <hr>
+           <div class="mx-2  font-bold text-gray-500">
+            Staff No :{{stuff.staffNo}} <br>
+            Name :{{stuff.name}} <br>
+            Surname :{{stuff.surname}} <br>
+            Phone no :{{stuff.phone}} <br>
+            Email :{{stuff.email}} <br>
+           </div>
+           <div class="mt-5 flex justify-end">
+            <button (click)="logout()" class=" px-5 py-2 bg-sky-300 text-white font-semibold rounded shadow-md">Log out</button>
+           </div>
+          
+    </div>
+    </div>
+   </div>
+
+
+</div>
